@@ -1,0 +1,24 @@
+config:
+  target: "https://api.example.com"
+  phases:
+    - duration: 50
+      arrivalRate: 5
+      rampTo: 5
+  
+
+scenarios:
+  - name: "Retrive the user data"
+    flow:
+      - get:
+          url: "/users"
+          capture:
+            json: "$.users[*].id"
+            as: "userIds"
+  - name: "Retrieve user details"
+    flow:
+      - foreach:
+           iterator: "userId"
+           in: {{userIds}}
+           steps:
+             - get:
+                url: "/users/{{ userId }}"
