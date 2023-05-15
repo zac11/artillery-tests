@@ -1,0 +1,27 @@
+config:
+  target: 'https://airportgap.dev-tester.com/api'
+  phases:
+    - name: "Test with Auth"
+      duration: 5
+      arrivalRate: 2
+      rampTo: 2
+
+  plugins:
+    expect: {}
+
+scenarios:
+  - name: "Get all airports"
+    flow:
+        - get:
+            url: "/airports"
+            headers: 
+              - name: "Content-Type"
+                value: "application/json"
+              - name: "Authorization"
+                # replace the token value with actual token
+                value: "Bearer xxxxxxxxxxxxxxxx"
+            expect:
+              - statusCode: 200
+              - contentType: json
+              - equals:
+                  - respMessage: "OK"

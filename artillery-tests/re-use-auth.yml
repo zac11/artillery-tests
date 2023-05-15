@@ -1,0 +1,42 @@
+config:
+  target: 'https://airportgap.dev-tester.com/api'
+  phases:
+    - name: "Re-use auth"
+      duration: 5
+      arrivalRate: 2
+      rampTo: 2
+  payload:
+    # Define the coping file and fields to load
+    path: "/data/auth.csv"
+    fields:
+      - "username"
+      - "password"
+    order: 
+  plugins:
+    expect: {}
+
+scenarios:
+  - name: "Get all airports"
+    flow:
+        - post:
+            url: "/tokens"
+            headers: {
+              "Content-Type": "application/json"
+            }
+            json:
+              email: {{username}}
+              password: {{password}}
+            capture:
+              - json: $.token
+                as : token
+
+        - get:
+            url: "/airports"
+            headers: {
+              "Authorization": "Bearer {{token}}"
+            }
+            expect:
+              - statusCode: 200
+              - contentType: json
+              - equals:
+                  - respMessage: "OK"

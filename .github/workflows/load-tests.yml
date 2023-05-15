@@ -1,0 +1,21 @@
+name: Artillery IO Load Tests
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  artillery:
+    timeout-minutes: 60
+
+    runs-on: ubuntu-latest
+
+    container: artilleryio/artillery:latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Execute the tests
+      run: /home/node/artillery/bin/run run artillery-tests/first-test.yml
+

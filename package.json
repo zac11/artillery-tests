@@ -1,0 +1,22 @@
+{
+  "name": "artillery-tests",
+  "version": "1.0.0",
+  "description": "Tests using Artillery IO and others",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zac11/artillery-tests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zac11/artillery-tests/issues"
+  },
+  "homepage": "https://github.com/zac11/artillery-tests#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.33.0",
+    "artillery": "^2.0.0-31"
+  }
+}
