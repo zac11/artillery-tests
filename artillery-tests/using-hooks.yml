@@ -1,0 +1,33 @@
+config:
+  target: 'https://reqres.in/api'
+  phases:
+    - name: "First Test"
+      duration: 5
+      arrivalRate: 2
+      rampTo: 2
+
+  plugins:
+    expect: {}
+
+scenarios:
+  - name: "Get a single user"
+    flow:
+      - get:
+          url: "/users/2"
+          expect:
+            - statusCode: 200
+            - contentType: json
+            - equals:
+                - respMessage: "OK"
+  - name: "Get another user"
+    flow:
+      - get:
+         url: "/users/4"
+         expect:
+           - statusCode: 200
+
+hooks:
+  beforeScenario: './processing/hooks.js:beforeScenario'
+  afterScenario: './processing/hooks.js:afterScenario'
+ 
+      
