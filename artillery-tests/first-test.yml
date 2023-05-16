@@ -1,21 +1,12 @@
 config:
-  target: 'https://reqres.in/api'
+  target: "http://lab.artillery.io"
   phases:
     - name: "First Test"
       duration: 5
       arrivalRate: 2
       rampTo: 2
 
-  plugins:
-    expect: {}
-
 scenarios:
-  - name: "Get a single user"
-    flow:
-        - get:
-            url: "/users/2"
-            expect:
-              - statusCode: 200
-              - contentType: json
-              - equals:
-                  - respMessage: "OK"
+  - flow:
+    - get:
+        url: "/movies"
